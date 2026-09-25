@@ -72,17 +72,18 @@
             --badge-bg: #ffffffd4;
         }
 
+        /* HIGH-CONTRAST MIDNIGHT WARM THEME */
         html[data-theme="dark"] {
-            --bg-base: #1c1816;
-            --grad-1: rgba(56, 38, 30, 0.55);
-            --grad-2: rgba(43, 31, 48, 0.5);
-            --grad-3: rgba(30, 24, 22, 0.85);
-            --accent-main: #e8957c;
-            --card-bg: #292320e8;
-            --card-border: #3d342f;
-            --text-title: #ffffff;
-            --text-body: #d1c2ba;
-            --badge-bg: #2d2522e0;
+            --bg-base: #141210;
+            --grad-1: rgba(80, 50, 40, 0.4);
+            --grad-2: rgba(50, 35, 60, 0.4);
+            --grad-3: rgba(25, 20, 18, 0.8);
+            --accent-main: #ff9e80;
+            --card-bg: #221d1bfa;
+            --card-border: #4a3d36;
+            --text-title: #ffffff !important;
+            --text-body: #f5eedc !important;
+            --badge-bg: #2d2623e0;
         }
 
         body {
@@ -100,6 +101,7 @@
             transition: background 0.35s ease, color 0.35s ease;
         }
 
+        /* Interactive Canvas for Trail Effect */
         #sparkleCanvas {
             position: fixed;
             top: 0;
@@ -107,17 +109,55 @@
             width: 100vw;
             height: 100vh;
             pointer-events: none;
-            z-index: 10000;
+            z-index: 999;
         }
 
-        /* Welcome Overlay default hidden */
+        /* FLOATING SIDE TEDDIES / DECORATIONS */
+        .floating-side-item {
+            position: fixed;
+            pointer-events: none;
+            z-index: 50;
+            user-select: none;
+            opacity: 0.85;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.12));
+        }
+
+        .float-left-teddy {
+            left: 25px;
+            top: 35%;
+            font-size: 55px;
+            animation: floatTeddyLeft 4.5s ease-in-out infinite;
+        }
+
+        .float-right-teddy {
+            right: 25px;
+            bottom: 25%;
+            font-size: 50px;
+            animation: floatTeddyRight 5s ease-in-out infinite;
+        }
+
+        @keyframes floatTeddyLeft {
+            0%, 100% { transform: translateY(0) rotate(-6deg); }
+            50% { transform: translateY(-22px) rotate(6deg); }
+        }
+
+        @keyframes floatTeddyRight {
+            0%, 100% { transform: translateY(0) rotate(8deg); }
+            50% { transform: translateY(-26px) rotate(-8deg); }
+        }
+
+        @media (max-width: 768px) {
+            .floating-side-item { display: none; }
+        }
+
+        /* Welcome Overlay */
         .welcome-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: radial-gradient(circle at 50% 40%, rgba(45, 27, 36, 0.82) 0%, rgba(22, 14, 18, 0.94) 100%);
+            background: radial-gradient(circle at 50% 40%, rgba(45, 27, 36, 0.88) 0%, rgba(22, 14, 18, 0.96) 100%);
             backdrop-filter: blur(18px);
             z-index: 9999;
             display: none;
@@ -146,6 +186,13 @@
             width: 100%;
             padding: 48px 36px;
             text-align: center;
+            color: #2b1812;
+            animation: popUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+        }
+
+        @keyframes popUp {
+            from { opacity: 0; transform: scale(0.85); }
+            to { opacity: 1; transform: scale(1); }
         }
 
         .welcome-icon-box {
@@ -158,6 +205,7 @@
             align-items: center;
             justify-content: center;
             font-size: 46px;
+            box-shadow: 0 10px 25px rgba(226, 125, 96, 0.3);
         }
 
         .welcome-title {
@@ -172,6 +220,7 @@
             color: #6d564e;
             font-size: 1rem;
             margin-bottom: 30px;
+            line-height: 1.6;
         }
 
         .welcome-btn {
@@ -182,6 +231,12 @@
             border-radius: 50px;
             border: none;
             cursor: pointer;
+            box-shadow: 0 10px 25px rgba(224, 83, 48, 0.4);
+            transition: transform 0.2s ease;
+        }
+
+        .welcome-btn:hover {
+            transform: scale(1.05);
         }
 
         .side-theme-btn {
@@ -201,6 +256,8 @@
             justify-content: center;
             font-size: 1.4rem;
             cursor: pointer;
+            color: var(--text-title);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
         }
 
         .hero-banner {
@@ -218,27 +275,28 @@
             font-weight: 700;
             color: var(--accent-main);
             margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
 
         .brand-title {
             font-family: 'Playfair Display', serif;
             font-size: 2.8rem;
             font-weight: 700;
-            color: var(--text-title);
+            color: var(--text-title) !important;
         }
 
         .brand-subtitle {
             font-size: 1rem;
-            color: var(--text-body);
+            color: var(--text-body) !important;
             max-width: 580px;
             margin: 10px auto 0;
+            line-height: 1.6;
         }
 
         .container {
             max-width: 1040px;
         }
 
-        /* Category Scroll */
         .category-scroll {
             display: flex;
             gap: 14px;
@@ -261,7 +319,7 @@
             border-radius: 50px;
             font-size: 0.9rem;
             font-weight: 700;
-            color: var(--text-title);
+            color: var(--text-title) !important;
             cursor: pointer;
             white-space: nowrap;
             flex-shrink: 0;
@@ -270,6 +328,8 @@
             gap: 8px;
             transition: all 0.25s ease;
             user-select: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            text-decoration: none;
         }
 
         .cat-btn.active {
@@ -283,7 +343,7 @@
             background: var(--card-bg);
             border: 1px solid var(--card-border);
             border-radius: 26px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
             overflow: hidden;
             transition: transform 0.3s ease;
         }
@@ -295,7 +355,7 @@
         .card-img-wrapper {
             height: 230px;
             width: 100%;
-            background: #f3ece6;
+            background: #2a2421;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -321,7 +381,7 @@
         .price-tag {
             font-size: 1.6rem;
             font-weight: 800;
-            color: var(--text-title);
+            color: var(--text-title) !important;
         }
 
         .btn-order-wa {
@@ -335,6 +395,7 @@
             justify-content: center;
             gap: 8px;
             text-decoration: none;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
         }
 
         .empty-showcase {
@@ -345,6 +406,13 @@
             border-radius: 30px;
             margin: 20px auto;
             max-width: 520px;
+            color: var(--text-title);
+        }
+
+        .footer-note {
+            color: var(--text-body) !important;
+            text-align: center;
+            padding: 35px 15px 25px;
         }
 
         .theme-sheet {
@@ -363,6 +431,7 @@
             justify-content: space-between;
             cursor: pointer;
             margin-bottom: 11px;
+            color: var(--text-title);
         }
 
         .theme-option-card.active {
@@ -382,12 +451,22 @@
 
 <canvas id="sparkleCanvas"></canvas>
 
+<!-- FLOATING TEDDY BEAR BACKGROUND CHARACTERS -->
+<div class="floating-side-item float-left-teddy">🧸</div>
+<div class="floating-side-item float-right-teddy">🎀</div>
+
+<!-- Welcome Modal (Zero Flicker) -->
 <div class="welcome-overlay" id="welcomeOverlay">
     <div class="welcome-card">
-        <div class="welcome-icon-box">🧶</div>
+        <div class="welcome-icon-box">🧸</div>
+        <span class="badge bg-danger-subtle text-danger px-3 py-1 rounded-pill mb-2 fw-bold">🌸 Handcrafted Boutique</span>
         <h2 class="welcome-title">Welcome to Amyra's</h2>
-        <p class="welcome-subtitle">Cute amigurumi dolls, aesthetic floral sling purses, and custom hand-knit wool art made for you.</p>
-        <button class="welcome-btn" onclick="enterStudio()">Explore Studio ✨</button>
+        <p class="welcome-subtitle">
+            Discover cute amigurumi dolls, aesthetic floral sling purses, and custom woollen decor knit with love.
+        </p>
+        <button class="welcome-btn" onclick="enterStudio()">
+            Explore Studio ✨
+        </button>
     </div>
 </div>
 
@@ -400,7 +479,7 @@
 </div>
 
 <div class="container pb-4">
-    <!-- Instant Filter (No Page Reload) -->
+    <!-- Category Filter Bar (Smooth, no page refresh) -->
     <div class="category-scroll" id="catScroll">
         <div class="cat-btn active" onclick="filterCategory('all', this)"><span>✨</span> All Items</div>
         <div class="cat-btn" onclick="filterCategory('dolls', this)"><span>🧸</span> Dolls & Amigurumi</div>
@@ -409,7 +488,7 @@
         <div class="cat-btn" onclick="filterCategory('accessories', this)"><span>🎀</span> Keychains & Accessories</div>
     </div>
 
-    <!-- Products Container -->
+    <!-- Strictly Real Database Products Only (NO DUMMY CARDS) -->
     <div class="row g-4" id="productsGrid">
         {% if products %}
             {% for product in products %}
@@ -419,7 +498,7 @@
                         {% if product.image %}
                         <img src="{{ product.image.url }}" alt="{{ product.title }}">
                         {% else %}
-                        <span style="font-size: 55px;">🧶</span>
+                        <span style="font-size: 55px;">🧸</span>
                         {% endif %}
                     </div>
                     <div class="card-body p-4 d-flex flex-column justify-content-between">
@@ -446,15 +525,15 @@
         {% else %}
             <div class="col-12">
                 <div class="empty-showcase">
-                    <span style="font-size: 48px;">✨</span>
-                    <h5 class="fw-bold mt-3 mb-2">Store is Empty</h5>
-                    <p class="small mb-0 text-muted">Add products directly from the admin dashboard.</p>
+                    <span style="font-size: 48px;">🧸✨</span>
+                    <h5 class="fw-bold mt-3 mb-2">Studio Collection Ready!</h5>
+                    <p class="small mb-0">Add your handmade crochet products directly from the admin panel.</p>
                 </div>
             </div>
         {% endif %}
     </div>
 
-    <div class="text-center py-4 small text-muted">
+    <div class="footer-note small">
         ✨ Handcrafted with care by Amyra • Each stitch tells a story ✨
     </div>
 </div>
@@ -506,6 +585,84 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
+    // GPU Canvas Particle Trail Engine
+    const canvas = document.getElementById('sparkleCanvas');
+    const ctx = canvas.getContext('2d', { alpha: true });
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
+
+    window.addEventListener('resize', () => {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = width;
+        canvas.height = height;
+    });
+
+    const symbols = ['🧸', '🌸', '✨', '🧶', '💖', '🎀', '⭐', '🌷'];
+    const particles = [];
+    let lastSpawn = 0;
+
+    class Particle {
+        constructor(x, y) {
+            this.x = x;
+            this.y = y;
+            this.char = symbols[Math.floor(Math.random() * symbols.length)];
+            this.size = Math.random() * 8 + 18;
+            this.alpha = 1;
+            this.vx = (Math.random() - 0.5) * 2;
+            this.vy = -(Math.random() * 2 + 1);
+            this.rotation = (Math.random() - 0.5) * 0.5;
+            this.angle = 0;
+            this.decay = Math.random() * 0.018 + 0.018;
+        }
+        update() {
+            this.x += this.vx;
+            this.y += this.vy;
+            this.angle += this.rotation;
+            this.alpha -= this.decay;
+        }
+        draw(ctx) {
+            ctx.save();
+            ctx.globalAlpha = Math.max(this.alpha, 0);
+            ctx.translate(this.x, this.y);
+            ctx.rotate(this.angle);
+            ctx.font = `${this.size}px sans-serif`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(this.char, 0, 0);
+            ctx.restore();
+        }
+    }
+
+    function addParticle(x, y) {
+        const now = performance.now();
+        if (now - lastSpawn < 25) return;
+        lastSpawn = now;
+        if (particles.length < 70) particles.push(new Particle(x, y));
+    }
+
+    window.addEventListener('mousemove', (e) => addParticle(e.clientX, e.clientY));
+    window.addEventListener('touchmove', (e) => {
+        if (e.touches && e.touches[0]) addParticle(e.touches[0].clientX, e.touches[0].clientY);
+    }, { passive: true });
+
+    function renderLoop() {
+        ctx.clearRect(0, 0, width, height);
+        for (let i = particles.length - 1; i >= 0; i--) {
+            particles[i].update();
+            if (particles[i].alpha <= 0) {
+                particles.splice(i, 1);
+            } else {
+                particles[i].draw(ctx);
+            }
+        }
+        requestAnimationFrame(renderLoop);
+    }
+    requestAnimationFrame(renderLoop);
+
+    // Welcome Modal Control
     const overlay = document.getElementById('welcomeOverlay');
     if (!localStorage.getItem('studio_entered')) {
         overlay.classList.add('visible');
@@ -519,7 +676,7 @@
         }
     }
 
-    // Instant Filter without Page Reload
+    // Filter without page reload
     function filterCategory(cat, element) {
         document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
         element.classList.add('active');
