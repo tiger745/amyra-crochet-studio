@@ -17,7 +17,6 @@
             --card-border: #f0e2d8;
             --text-title: #38241d;
             --text-body: #7b6258;
-            --side-bg: #ffffffb3;
             --badge-bg: #ffffffd4;
         }
 
@@ -31,7 +30,6 @@
             --card-border: #e6ddf5;
             --text-title: #2d1c42;
             --text-body: #6e5e83;
-            --side-bg: #ffffffb3;
             --badge-bg: #ffffffd4;
         }
 
@@ -45,7 +43,6 @@
             --card-border: #dbe8e0;
             --text-title: #1f3729;
             --text-body: #5b7566;
-            --side-bg: #ffffffb3;
             --badge-bg: #ffffffd4;
         }
 
@@ -59,7 +56,6 @@
             --card-border: #f8d7df;
             --text-title: #421c27;
             --text-body: #7d5b65;
-            --side-bg: #ffffffb3;
             --badge-bg: #ffffffd4;
         }
 
@@ -73,7 +69,6 @@
             --card-border: #e6ccb2;
             --text-title: #3b2314;
             --text-body: #6e584a;
-            --side-bg: #ffffffb3;
             --badge-bg: #ffffffd4;
         }
 
@@ -85,9 +80,8 @@
             --accent-main: #e8957c;
             --card-bg: #292320e8;
             --card-border: #3d342f;
-            --text-title: #faede6;
-            --text-body: #b8a69e;
-            --side-bg: #28221fb8;
+            --text-title: #ffffff;
+            --text-body: #d1c2ba;
             --badge-bg: #2d2522e0;
         }
 
@@ -116,6 +110,7 @@
             z-index: 10000;
         }
 
+        /* Welcome Overlay default hidden */
         .welcome-overlay {
             position: fixed;
             top: 0;
@@ -125,11 +120,15 @@
             background: radial-gradient(circle at 50% 40%, rgba(45, 27, 36, 0.82) 0%, rgba(22, 14, 18, 0.94) 100%);
             backdrop-filter: blur(18px);
             z-index: 9999;
-            display: flex;
+            display: none;
             align-items: center;
             justify-content: center;
             padding: 24px;
-            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .welcome-overlay.visible {
+            display: flex;
         }
 
         .welcome-overlay.hidden {
@@ -142,18 +141,11 @@
             background: #ffffff;
             border: 2px solid rgba(255, 225, 215, 0.8);
             border-radius: 36px;
-            box-shadow: 0 30px 90px rgba(0, 0, 0, 0.45), 0 0 45px rgba(226, 125, 96, 0.25);
+            box-shadow: 0 30px 90px rgba(0, 0, 0, 0.45);
             max-width: 500px;
             width: 100%;
             padding: 48px 36px;
             text-align: center;
-            animation: popUp 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) both;
-            position: relative;
-        }
-
-        @keyframes popUp {
-            from { opacity: 0; transform: scale(0.85); }
-            to { opacity: 1; transform: scale(1); }
         }
 
         .welcome-icon-box {
@@ -161,32 +153,11 @@
             height: 90px;
             margin: 0 auto 20px;
             background: linear-gradient(135deg, #ffe2d9 0%, #ffc6b5 100%);
-            border: 3px solid #ffffff;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 46px;
-            box-shadow: 0 12px 28px rgba(226, 125, 96, 0.35);
-            animation: pulse-bounce 2.2s infinite ease-in-out;
-        }
-
-        @keyframes pulse-bounce {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-8px) scale(1.06); }
-        }
-
-        .welcome-badge {
-            background: #fff2ee;
-            border: 1px solid #fed2c4;
-            color: #d85d3f;
-            font-size: 0.84rem;
-            font-weight: 800;
-            padding: 7px 20px;
-            border-radius: 50px;
-            letter-spacing: 0.4px;
-            display: inline-block;
-            margin-bottom: 15px;
         }
 
         .welcome-title {
@@ -194,14 +165,12 @@
             color: #2b1812;
             font-size: 2.35rem;
             font-weight: 700;
-            letter-spacing: -0.5px;
             margin-bottom: 12px;
         }
 
         .welcome-subtitle {
             color: #6d564e;
             font-size: 1rem;
-            line-height: 1.6;
             margin-bottom: 30px;
         }
 
@@ -209,22 +178,10 @@
             background: linear-gradient(135deg, #e76f51 0%, #e05330 100%);
             color: #ffffff;
             font-weight: 800;
-            font-size: 1.05rem;
             padding: 15px 44px;
             border-radius: 50px;
             border: none;
             cursor: pointer;
-            box-shadow: 0 10px 28px rgba(224, 83, 48, 0.42);
-            transition: all 0.25s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .welcome-btn:hover {
-            transform: scale(1.05) translateY(-2px);
-            box-shadow: 0 14px 34px rgba(224, 83, 48, 0.55);
-            color: #ffffff;
         }
 
         .side-theme-btn {
@@ -244,36 +201,22 @@
             justify-content: center;
             font-size: 1.4rem;
             cursor: pointer;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-            transition: all 0.25s ease;
-        }
-
-        .side-theme-btn:hover {
-            transform: translateY(-50%) scale(1.12);
-            border-color: var(--accent-main);
-            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
         }
 
         .hero-banner {
             text-align: center;
             padding: 45px 20px 20px;
-            position: relative;
-            z-index: 1;
         }
 
         .flower-badge {
             display: inline-flex;
-            align-items: center;
-            gap: 8px;
             background: var(--badge-bg);
-            backdrop-filter: blur(8px);
             border: 1px solid var(--card-border);
             padding: 7px 18px;
             border-radius: 50px;
             font-size: 0.85rem;
             font-weight: 700;
             color: var(--accent-main);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
             margin-bottom: 15px;
         }
 
@@ -289,39 +232,21 @@
             color: var(--text-body);
             max-width: 580px;
             margin: 10px auto 0;
-            line-height: 1.6;
         }
 
         .container {
-            position: relative;
-            z-index: 1;
             max-width: 1040px;
         }
 
-        /* --- BUTTERY SMOOTH HORIZONTAL CATEGORY BAR --- */
-        .category-scroll-container {
-            position: relative;
-            width: 100%;
-            margin-bottom: 1.8rem;
-        }
-
+        /* Category Scroll */
         .category-scroll {
             display: flex;
             gap: 14px;
             overflow-x: auto;
-            overflow-y: hidden;
-            padding: 12px 16px 20px 16px;
+            padding: 12px 16px 20px;
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
-            scroll-snap-type: x mandatory;
             scrollbar-width: none;
-            -ms-overflow-style: none;
-            cursor: grab;
-            user-select: none;
-        }
-
-        .category-scroll:active {
-            cursor: grabbing;
         }
 
         .category-scroll::-webkit-scrollbar {
@@ -329,7 +254,6 @@
         }
 
         .cat-btn {
-            scroll-snap-align: center;
             background: var(--badge-bg);
             backdrop-filter: blur(14px);
             border: 1.5px solid var(--card-border);
@@ -338,75 +262,64 @@
             font-size: 0.9rem;
             font-weight: 700;
             color: var(--text-title);
-            text-decoration: none;
+            cursor: pointer;
             white-space: nowrap;
             flex-shrink: 0;
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
-            transform: scale(0.96);
-            opacity: 0.88;
-            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
-                        opacity 0.25s ease,
-                        box-shadow 0.35s ease,
-                        background 0.3s ease,
-                        border-color 0.3s ease;
-            will-change: transform, opacity;
-        }
-
-        .cat-btn:hover {
-            transform: scale(1.04) translateY(-2px);
-            opacity: 1;
-            border-color: var(--accent-main);
-            box-shadow: 0 10px 26px rgba(0, 0, 0, 0.08);
-            color: var(--text-title);
+            transition: all 0.25s ease;
+            user-select: none;
         }
 
         .cat-btn.active {
             background: var(--accent-main);
             color: #ffffff !important;
             border-color: var(--accent-main);
-            transform: scale(1.06);
-            opacity: 1;
             box-shadow: 0 8px 24px rgba(226, 125, 96, 0.35);
-        }
-
-        .cat-btn.in-view {
-            transform: scale(1);
-            opacity: 1;
-        }
-
-        .cat-btn.active.in-view {
-            transform: scale(1.08);
         }
 
         .crochet-card {
             background: var(--card-bg);
-            backdrop-filter: blur(12px);
             border: 1px solid var(--card-border);
-            border-radius: 24px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
+            border-radius: 26px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
             overflow: hidden;
+            transition: transform 0.3s ease;
         }
 
         .crochet-card:hover {
             transform: translateY(-6px);
-            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.1);
         }
 
-        .card-preview-box {
-            height: 220px;
+        .card-img-wrapper {
+            height: 230px;
+            width: 100%;
+            background: #f3ece6;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 70px;
-            background: linear-gradient(135deg, var(--grad-1) 0%, var(--grad-3) 100%);
+        }
+
+        .card-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-title-text {
+            color: var(--text-title) !important;
+            font-size: 1.15rem;
+            font-weight: 800;
+        }
+
+        .card-desc-text {
+            color: var(--text-body) !important;
+            font-size: 0.88rem;
         }
 
         .price-tag {
-            font-size: 1.55rem;
+            font-size: 1.6rem;
             font-weight: 800;
             color: var(--text-title);
         }
@@ -415,29 +328,23 @@
             background: #25d366;
             color: #ffffff;
             font-weight: 700;
-            font-size: 0.95rem;
             padding: 13px 20px;
-            border-radius: 16px;
-            border: none;
+            border-radius: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 14px rgba(37, 211, 102, 0.3);
             text-decoration: none;
         }
 
-        .btn-order-wa:hover {
-            background: #1ebc59;
-            color: #ffffff;
-        }
-
-        .footer-note {
+        .empty-showcase {
             text-align: center;
-            padding: 35px 15px 25px;
-            color: var(--text-body);
-            font-size: 0.9rem;
+            padding: 60px 20px;
+            background: var(--card-bg);
+            border: 2px dashed var(--card-border);
+            border-radius: 30px;
+            margin: 20px auto;
+            max-width: 520px;
         }
 
         .theme-sheet {
@@ -478,14 +385,9 @@
 <div class="welcome-overlay" id="welcomeOverlay">
     <div class="welcome-card">
         <div class="welcome-icon-box">🧶</div>
-        <span class="welcome-badge">🌸 Handcrafted Boutique</span>
         <h2 class="welcome-title">Welcome to Amyra's</h2>
-        <p class="welcome-subtitle">
-            Discover cute amigurumi dolls, aesthetic floral sling purses, and custom woollen decor knit with love.
-        </p>
-        <button class="welcome-btn" onclick="enterStudio()">
-            <span>Explore Studio</span> <span>✨</span>
-        </button>
+        <p class="welcome-subtitle">Cute amigurumi dolls, aesthetic floral sling purses, and custom hand-knit wool art made for you.</p>
+        <button class="welcome-btn" onclick="enterStudio()">Explore Studio ✨</button>
     </div>
 </div>
 
@@ -498,36 +400,36 @@
 </div>
 
 <div class="container pb-4">
-    <!-- Smooth Animated Category Scrollbar -->
-    <div class="category-scroll-container">
-        <div class="category-scroll" id="catScroll">
-            <a href="?category=all" class="cat-btn {% if selected_category == 'all' or not selected_category %}active{% endif %}"><span>✨</span> All Items</a>
-            <a href="?category=dolls" class="cat-btn {% if selected_category == 'dolls' %}active{% endif %}"><span>🧸</span> Dolls & Amigurumi</a>
-            <a href="?category=purses" class="cat-btn {% if selected_category == 'purses' %}active{% endif %}"><span>👛</span> Purses & Bags</a>
-            <a href="?category=flowers" class="cat-btn {% if selected_category == 'flowers' %}active{% endif %}"><span>🌸</span> Flowers & Decor</a>
-            <a href="?category=accessories" class="cat-btn {% if selected_category == 'accessories' %}active{% endif %}"><span>🎀</span> Keychains & Accessories</a>
-        </div>
+    <!-- Instant Filter (No Page Reload) -->
+    <div class="category-scroll" id="catScroll">
+        <div class="cat-btn active" onclick="filterCategory('all', this)"><span>✨</span> All Items</div>
+        <div class="cat-btn" onclick="filterCategory('dolls', this)"><span>🧸</span> Dolls & Amigurumi</div>
+        <div class="cat-btn" onclick="filterCategory('purses', this)"><span>👛</span> Purses & Bags</div>
+        <div class="cat-btn" onclick="filterCategory('flowers', this)"><span>🌸</span> Flowers & Decor</div>
+        <div class="cat-btn" onclick="filterCategory('accessories', this)"><span>🎀</span> Keychains & Accessories</div>
     </div>
 
-    <!-- Product Showcase Grid -->
-    <div class="row g-4">
+    <!-- Products Container -->
+    <div class="row g-4" id="productsGrid">
         {% if products %}
             {% for product in products %}
-            <div class="col-12 col-md-4">
+            <div class="col-12 col-md-4 product-item" data-category="{{ product.category }}">
                 <div class="card crochet-card h-100">
-                    {% if product.image %}
-                    <img src="{{ product.image.url }}" class="card-img-top" style="height: 220px; object-fit: cover;" alt="{{ product.title }}">
-                    {% else %}
-                    <div class="card-preview-box">🧶</div>
-                    {% endif %}
+                    <div class="card-img-wrapper">
+                        {% if product.image %}
+                        <img src="{{ product.image.url }}" alt="{{ product.title }}">
+                        {% else %}
+                        <span style="font-size: 55px;">🧶</span>
+                        {% endif %}
+                    </div>
                     <div class="card-body p-4 d-flex flex-column justify-content-between">
                         <div>
                             <div class="d-flex justify-content-between align-items-center mb-2">
-                                <span class="badge bg-light text-dark border rounded-pill small">{{ product.get_category_display }}</span>
-                                <span class="badge bg-success-subtle text-success rounded-pill px-2 py-1">Available</span>
+                                <span class="badge bg-light text-dark border rounded-pill px-3 py-1 small">{{ product.get_category_display }}</span>
+                                <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill px-2 py-1">Available</span>
                             </div>
-                            <h5 class="fw-bold mb-2">{{ product.title }}</h5>
-                            <p class="text-muted small mb-0">{{ product.description }}</p>
+                            <h5 class="card-title-text mb-2">{{ product.title }}</h5>
+                            <p class="card-desc-text mb-0">{{ product.description }}</p>
                         </div>
                         <div class="mt-4">
                             <div class="d-flex justify-content-between align-items-center mb-3">
@@ -542,301 +444,95 @@
             </div>
             {% endfor %}
         {% else %}
-            <div class="col-12 col-md-4">
-                <div class="card crochet-card h-100">
-                    <div class="card-preview-box">🐰</div>
-                    <div class="card-body p-4 d-flex flex-column justify-content-between">
-                        <div>
-                            <div class="d-flex justify-content-between align-items-center mb-2">
-                                <span class="badge bg-light text-dark border rounded-pill small">Dolls & Amigurumi</span>
-                                <span class="badge bg-success-subtle text-success rounded-pill px-2 py-1">Ready to Order</span>
-                            </div>
-                            <h5 class="fw-bold mb-2">Cute Bunny Amigurumi Doll</h5>
-                            <p class="text-muted small mb-0">Ultra-soft plush hand-knitted bunny doll wearing a soft pink dress and bow.</p>
-                        </div>
-                        <div class="mt-4">
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <span class="price-tag">₹649</span>
-                            </div>
-                            <a href="https://wa.me/919876543210?text=Hello! I would like to order Cute Bunny Amigurumi Doll." target="_blank" class="btn btn-order-wa w-100">
-                                Order on WhatsApp 💬
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-12 col-md-4">
-                <div class="card crochet-card h-100">
-                    <div class="card-preview-box">👛</div>
-                    <div class="card-body p-4 d-flex flex-column justify-content-between">
-                        <div>
-                            <div class="d-flex justify-content-between align-items-center mb-2">
-                                <span class="badge bg-light text-dark border rounded-pill small">Purses & Bags</span>
-                                <span class="badge bg-success-subtle text-success rounded-pill px-2 py-1">Bestseller</span>
-                            </div>
-                            <h5 class="fw-bold mb-2">Daisy Floral Sling Bag</h5>
-                            <p class="text-muted small mb-0">Handmade aesthetic pastel shoulder purse with double-knit strap and daisy motifs.</p>
-                        </div>
-                        <div class="mt-4">
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <span class="price-tag">₹799</span>
-                            </div>
-                            <a href="https://wa.me/919876543210?text=Hello! I would like to order Daisy Floral Sling Bag." target="_blank" class="btn btn-order-wa w-100">
-                                Order on WhatsApp 💬
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-12 col-md-4">
-                <div class="card crochet-card h-100">
-                    <div class="card-preview-box">🌷</div>
-                    <div class="card-body p-4 d-flex flex-column justify-content-between">
-                        <div>
-                            <div class="d-flex justify-content-between align-items-center mb-2">
-                                <span class="badge bg-light text-dark border rounded-pill small">Flowers & Decor</span>
-                                <span class="badge bg-success-subtle text-success rounded-pill px-2 py-1">Everlasting</span>
-                            </div>
-                            <h5 class="fw-bold mb-2">Potted Tulip Flower Plant</h5>
-                            <p class="text-muted small mb-0">Handcrafted eternal desk bloom knit with soft pastel cotton yarn. Perfect for gifting.</p>
-                        </div>
-                        <div class="mt-4">
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <span class="price-tag">₹449</span>
-                            </div>
-                            <a href="https://wa.me/919876543210?text=Hello! I would like to order Potted Tulip Flower Plant." target="_blank" class="btn btn-order-wa w-100">
-                                Order on WhatsApp 💬
-                            </a>
-                        </div>
-                    </div>
+            <div class="col-12">
+                <div class="empty-showcase">
+                    <span style="font-size: 48px;">✨</span>
+                    <h5 class="fw-bold mt-3 mb-2">Store is Empty</h5>
+                    <p class="small mb-0 text-muted">Add products directly from the admin dashboard.</p>
                 </div>
             </div>
         {% endif %}
     </div>
 
-    <div class="footer-note">
-        <p class="mb-0">✨ Handcrafted with care by Amyra • Each stitch tells a story ✨</p>
+    <div class="text-center py-4 small text-muted">
+        ✨ Handcrafted with care by Amyra • Each stitch tells a story ✨
     </div>
 </div>
 
 <div class="offcanvas offcanvas-end theme-sheet" tabindex="-1" id="themeCenter">
-    <div class="offcanvas-header border-bottom" style="border-color: var(--card-border) !important;">
-        <h5 class="offcanvas-title fw-bold" style="font-family: 'Playfair Display', serif;">🎨 Studio Theme Center</h5>
+    <div class="offcanvas-header border-bottom">
+        <h5 class="offcanvas-title fw-bold">🎨 Studio Theme Center</h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
     </div>
     <div class="offcanvas-body p-4">
-        <p class="small mb-4" style="color: var(--text-body);">Personalize your browsing palette.</p>
-
         <div class="theme-option-card active" onclick="setTheme('peach', this)">
             <div class="d-flex align-items-center">
                 <span class="theme-preview-dot" style="background: linear-gradient(135deg, #e27d60, #fedbd0);"></span>
-                <div>
-                    <h6 class="mb-0 fw-bold">Cozy Peach</h6>
-                    <small class="text-muted">Warm terracotta & cream</small>
-                </div>
+                <span class="fw-bold">Cozy Peach</span>
             </div>
-            <span class="badge bg-light text-dark rounded-pill">Classic</span>
         </div>
-
         <div class="theme-option-card" onclick="setTheme('lavender', this)">
             <div class="d-flex align-items-center">
                 <span class="theme-preview-dot" style="background: linear-gradient(135deg, #9b6bc4, #e5d7fa);"></span>
-                <div>
-                    <h6 class="mb-0 fw-bold">Lavender Lilac</h6>
-                    <small class="text-muted">Aesthetic purple mist</small>
-                </div>
+                <span class="fw-bold">Lavender Lilac</span>
             </div>
-            <span>💜</span>
         </div>
-
         <div class="theme-option-card" onclick="setTheme('sage', this)">
             <div class="d-flex align-items-center">
                 <span class="theme-preview-dot" style="background: linear-gradient(135deg, #4a8b66, #d6eedc);"></span>
-                <div>
-                    <h6 class="mb-0 fw-bold">Matcha & Sage</h6>
-                    <small class="text-muted">Botanical greenery</small>
-                </div>
+                <span class="fw-bold">Matcha & Sage</span>
             </div>
-            <span>🍃</span>
         </div>
-
         <div class="theme-option-card" onclick="setTheme('strawberry', this)">
             <div class="d-flex align-items-center">
                 <span class="theme-preview-dot" style="background: linear-gradient(135deg, #e65c7b, #ffd6e0);"></span>
-                <div>
-                    <h6 class="mb-0 fw-bold">Strawberry Pink</h6>
-                    <small class="text-muted">Sweet pastel blush</small>
-                </div>
+                <span class="fw-bold">Strawberry Pink</span>
             </div>
-            <span>🍓</span>
         </div>
-
         <div class="theme-option-card" onclick="setTheme('latte', this)">
             <div class="d-flex align-items-center">
                 <span class="theme-preview-dot" style="background: linear-gradient(135deg, #9c6644, #ede0d4);"></span>
-                <div>
-                    <h6 class="mb-0 fw-bold">Warm Latte</h6>
-                    <small class="text-muted">Toasted coffee caramel</small>
-                </div>
+                <span class="fw-bold">Warm Latte</span>
             </div>
-            <span>☕</span>
         </div>
-
         <div class="theme-option-card" onclick="setTheme('dark', this)">
             <div class="d-flex align-items-center">
                 <span class="theme-preview-dot" style="background: linear-gradient(135deg, #1c1816, #e8957c);"></span>
-                <div>
-                    <h6 class="mb-0 fw-bold">Midnight Warm</h6>
-                    <small class="text-muted">Dark studio mode</small>
-                </div>
+                <span class="fw-bold">Midnight Warm</span>
             </div>
-            <span>🌙</span>
         </div>
     </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    // GPU Canvas Particle Engine
-    const canvas = document.getElementById('sparkleCanvas');
-    const ctx = canvas.getContext('2d', { alpha: true });
-    let width = window.innerWidth;
-    let height = window.innerHeight;
-    canvas.width = width;
-    canvas.height = height;
+    const overlay = document.getElementById('welcomeOverlay');
+    if (!localStorage.getItem('studio_entered')) {
+        overlay.classList.add('visible');
+    }
 
-    window.addEventListener('resize', () => {
-        width = window.innerWidth;
-        height = window.innerHeight;
-        canvas.width = width;
-        canvas.height = height;
-    });
-
-    const symbols = ['🌸', '✨', '🧶', '💖', '🎀', '⭐', '🌷'];
-    const particles = [];
-    let lastSpawn = 0;
-
-    class Particle {
-        constructor(x, y) {
-            this.x = x;
-            this.y = y;
-            this.char = symbols[Math.floor(Math.random() * symbols.length)];
-            this.size = Math.random() * 8 + 16;
-            this.alpha = 1;
-            this.vx = (Math.random() - 0.5) * 1.8;
-            this.vy = -(Math.random() * 1.8 + 0.8);
-            this.rotation = (Math.random() - 0.5) * 0.4;
-            this.angle = 0;
-            this.decay = Math.random() * 0.02 + 0.022;
-        }
-        update() {
-            this.x += this.vx;
-            this.y += this.vy;
-            this.angle += this.rotation;
-            this.alpha -= this.decay;
-        }
-        draw(ctx) {
-            ctx.save();
-            ctx.globalAlpha = Math.max(this.alpha, 0);
-            ctx.translate(this.x, this.y);
-            ctx.rotate(this.angle);
-            ctx.font = `${this.size}px sans-serif`;
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            ctx.fillText(this.char, 0, 0);
-            ctx.restore();
+    function enterStudio() {
+        if (overlay) {
+            overlay.classList.add('hidden');
+            localStorage.setItem('studio_entered', 'true');
+            setTimeout(() => { overlay.style.display = 'none'; }, 400);
         }
     }
 
-    function addParticle(x, y) {
-        const now = performance.now();
-        if (now - lastSpawn < 30) return;
-        lastSpawn = now;
-        if (particles.length < 60) particles.push(new Particle(x, y));
-    }
+    // Instant Filter without Page Reload
+    function filterCategory(cat, element) {
+        document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
+        element.classList.add('active');
 
-    window.addEventListener('mousemove', (e) => addParticle(e.clientX, e.clientY));
-    window.addEventListener('touchmove', (e) => {
-        if (e.touches && e.touches[0]) addParticle(e.touches[0].clientX, e.touches[0].clientY);
-    }, { passive: true });
-
-    function renderLoop() {
-        ctx.clearRect(0, 0, width, height);
-        for (let i = particles.length - 1; i >= 0; i--) {
-            particles[i].update();
-            if (particles[i].alpha <= 0) {
-                particles.splice(i, 1);
+        const items = document.querySelectorAll('.product-item');
+        items.forEach(item => {
+            if (cat === 'all' || item.dataset.category === cat) {
+                item.style.display = 'block';
             } else {
-                particles[i].draw(ctx);
-            }
-        }
-        requestAnimationFrame(renderLoop);
-    }
-    requestAnimationFrame(renderLoop);
-
-    // --- INTERACTIVE TOUCH & DRAG MOMENTUM SCROLL WITH SPRING ANIMATION ---
-    const scroller = document.getElementById('catScroll');
-    const catButtons = scroller.querySelectorAll('.cat-btn');
-
-    function updateCardMagnification() {
-        const center = scroller.scrollLeft + scroller.clientWidth / 2;
-        catButtons.forEach(btn => {
-            const btnCenter = btn.offsetLeft + btn.offsetWidth / 2;
-            const dist = Math.abs(center - btnCenter);
-            const maxDist = 200;
-            if (dist < maxDist) {
-                const ratio = 1 - (dist / maxDist);
-                const scale = 0.96 + (ratio * 0.12);
-                btn.style.transform = `scale(${scale})`;
-                btn.style.opacity = `${0.85 + (ratio * 0.15)}`;
-            } else {
-                btn.style.transform = `scale(0.96)`;
-                btn.style.opacity = `0.85`;
+                item.style.display = 'none';
             }
         });
     }
-
-    scroller.addEventListener('scroll', updateCardMagnification, { passive: true });
-    window.addEventListener('load', updateCardMagnification);
-
-    // Drag-to-Scroll on Desktop
-    let isDown = false;
-    let startX;
-    let scrollLeft;
-
-    scroller.addEventListener('mousedown', (e) => {
-        isDown = true;
-        startX = e.pageX - scroller.offsetLeft;
-        scrollLeft = scroller.scrollLeft;
-    });
-
-    scroller.addEventListener('mouseleave', () => { isDown = false; });
-    scroller.addEventListener('mouseup', () => { isDown = false; });
-
-    scroller.addEventListener('mousemove', (e) => {
-        if (!isDown) return;
-        e.preventDefault();
-        const x = e.pageX - scroller.offsetLeft;
-        const walk = (x - startX) * 1.6;
-        scroller.scrollLeft = scrollLeft - walk;
-    });
-
-    function enterStudio() {
-        const overlay = document.getElementById('welcomeOverlay');
-        if (overlay) {
-            overlay.classList.add('hidden');
-            sessionStorage.setItem('studio_entered', 'true');
-        }
-    }
-
-    window.addEventListener('DOMContentLoaded', () => {
-        if (sessionStorage.getItem('studio_entered') === 'true') {
-            const overlay = document.getElementById('welcomeOverlay');
-            if (overlay) overlay.style.display = 'none';
-        }
-    });
 
     function setTheme(themeName, element) {
         document.documentElement.setAttribute('data-theme', themeName);
